@@ -23,8 +23,6 @@ public class Main {
 
         calculateArr(arr, 0);
 
-        System.out.println(arr[56]);
-
         return System.currentTimeMillis() - a;
     }
 
