@@ -29,7 +29,7 @@ public class Server {
             in = new DataInputStream(socket.getInputStream());
             out = new DataOutputStream(socket.getOutputStream());
 
-            new Thread(() -> {
+            Thread inMessageThread = new Thread(() -> {
                 try {
                     while (true) {
                         out.writeUTF(message.nextLine());
@@ -38,7 +38,10 @@ public class Server {
                     System.err.println("Ни один клиент не подключен к серверу");
                 }
 
-            }).start();
+            });
+
+            inMessageThread.setDaemon(true);
+            inMessageThread.start();
 
             while (true) {
                 try {
